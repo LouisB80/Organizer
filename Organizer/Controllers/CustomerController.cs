@@ -13,9 +13,14 @@ namespace Organizer.Controllers
     {
         private OrganizerDbContext db = new OrganizerDbContext();
         // GET: Customer
-        public ActionResult ListCustomers()
+        public ActionResult ListCustomers(string search)
         {
-            List<Customer> customers = db.Customers.ToList();
+            var customerQ = from c in db.Customers select c;
+            if(string.IsNullOrEmpty(search))
+            {
+                customerQ = customerQ.Where(c => c.Firstname.Contains(search) || c.Lastname.Contains(search));
+            }
+            List<Customer> customers = customerQ.ToList();
             return View(customers);
         }
         // GET: Customer

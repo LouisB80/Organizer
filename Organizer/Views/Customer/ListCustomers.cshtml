@@ -7,8 +7,17 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h2 class="text-center">Liste des clients</h2>
-            @Html.ActionLink("Ajouter un client", "AddCustomer", "Customer", new { @class = "btn btn-primary mb-2" })
-            <div class="table-responsive">
+            @using (Html.BeginForm())
+            {
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search" placeholder="Chercher un client" aria-label="" aria-describedby="basic-addon1">
+                    <div class="input-group-append">
+                        <button class="btn btn-success" type="button">Chercher</button>
+                    </div>
+                </div>
+            }
+            @Html.ActionLink("Ajouter un client", "AddCustomer", "Customer", new { @class = "btn btn-primary mt-2" })
+            <div class="table-responsive mt-3">
                 <table class="table table-hover table-dark table-bordered">
                     <tr>
                         <td>Nom</td>
