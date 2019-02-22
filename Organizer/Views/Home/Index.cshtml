@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Accueil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="jumbotron jumbotron-fluid " id="jumbotronInfo" align="center" style="margin-bottom: 0px">
+    <div class="container">
+        <p>Nous sommes le @(((DateTime)ViewData["date"]).ToString("dd/MM/yyyy"))</p>
+    </div>
+</div>
+<div class="jumbotron">
+    @Html.Action("ListAppointment","Appointment")
+</div>

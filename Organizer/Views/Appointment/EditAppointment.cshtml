@@ -1,0 +1,43 @@
+﻿@model Organizer.Models.Appointment
+@{
+    ViewBag.Title = "Modifier un RDV";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@ViewBag.Title</h2>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.AppointmentID)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DateHour)
+                    @Html.EditorFor(model => model.DateHour, new { htmlAttributes = new { @class = "form-control", @id = "DateApp" } })
+                    @Html.ValidationMessageFor(model => model.DateHour)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BrokerID, "BrokerID", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md">
+                        @Html.DropDownList("BrokerID", null, htmlAttributes: new { @class = "custom-select" })
+                        @Html.ValidationMessageFor(model => model.BrokerID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CustomerID, "CustomerID", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md">
+                        @Html.DropDownList("CustomerID", null, htmlAttributes: new { @class = "custom-select" })
+                        @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Subject)
+                    @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Subject)
+                </div>
+                <input type="submit" value="Modifier" class="btn btn-success" />
+            }
+        </div>
+    </div>
+</div>
+

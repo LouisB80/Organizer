@@ -1,0 +1,35 @@
+﻿@model List<Organizer.Models.Customer>
+@{
+    ViewBag.Title = "Liste des clients";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center">Liste des clients</h2>
+            @Html.ActionLink("Ajouter un client", "AddCustomer", "Customer", new { @class = "btn btn-primary mb-2" })
+            <div class="table-responsive">
+                <table class="table table-hover table-dark table-bordered">
+                    <tr>
+                        <td>Nom</td>
+                        <td>Prénom</td>
+                        <td>Mail</td>
+                        <td>Numéro de téléphone</td>
+                        <td>Budget</td>
+                    </tr>
+                    @foreach (var customer in Model)
+                    {
+                        <tr>
+                            <td>@customer.Lastname</td>
+                            <td>@customer.Firstname</td>
+                            <td>@customer.Mail</td>
+                            <td>@customer.PhoneNumber</td>
+                            <td>@customer.Budget</td>
+                            <td>@Html.ActionLink("Detail", "ProfilCustomer", "Customer", new { id = customer.CustomerID }, new { @class = "btn btn-dark" })</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

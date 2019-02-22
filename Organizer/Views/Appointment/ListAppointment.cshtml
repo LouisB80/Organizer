@@ -1,0 +1,33 @@
+﻿@model List<Organizer.Models.Appointment>
+@{ 
+    Layout = null;
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center">Liste des rendez-vous</h2>
+            @Html.ActionLink("Ajouter un rendez-vous", "AddAppointment", "Appointment", new { @class = "btn btn-primary mb-2" })
+            <div class="table-responsive">
+                <table class="table table-hover table-dark table-bordered">
+                    <tr>
+                        <td>Date de rendez-vous</td>
+                        <td>Objet du rendez-vous</td>
+                        <td>Courtier</td>
+                        <td>Client</td>
+                        <td></td>
+                    </tr>
+                    @foreach (var appointment in Model)
+                    {
+                        <tr>
+                            <td>@appointment.DateHour</td>
+                            <td>@appointment.Subject</td>
+                            <td>@appointment.Broker.FullName</td>
+                            <td>@appointment.Customer.FullName</td>
+                            <td>@Html.ActionLink("Details", "DetailsAppointment", new { id = appointment.AppointmentID }, new { @class = "btn btn-dark" })</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+﻿@model Organizer.Models.Broker
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Voulez vous supprimer "@Html.DisplayFor(model => model.FullName)" des courtiers</h2>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            @Html.ActionLink("Oui", "Delete", "Broker", new { id = @Html.DisplayFor(model => model.BrokerID) }, new { @class = "btn btn-success" })
+            @Html.ActionLink("Non", "ProfilBroker", "Broker", new { id = @Html.DisplayFor(model => model.BrokerID) }, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+</div>

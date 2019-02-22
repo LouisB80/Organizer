@@ -1,0 +1,46 @@
+﻿@model Organizer.Models.Customer
+@{
+    ViewBag.Title = "ProfilCustomer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Profil de @Html.DisplayFor(model => model.FullName)</h2>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            @using (Html.BeginForm("EditCustomer", "Customer"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.CustomerID)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Lastname)
+                    @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Lastname)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Firstname)
+                    @Html.EditorFor(model => model.Firstname, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Firstname)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Mail)
+                    @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Mail)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PhoneNumber)
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Budget)
+                    @Html.EditorFor(model => model.Budget, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Budget)
+                </div>
+                <div class="col-8 text-center">
+                    <input type="submit" value="modifier" class="btn btn-success" />
+                    <span class="ml-2">@Html.ActionLink("Supprimer", "DeleteCustomer", "Customer", new { id = @Html.DisplayFor(model => model.CustomerID) }, new { @class = "btn btn-danger" })</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>

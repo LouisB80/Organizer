@@ -1,0 +1,47 @@
+﻿
+@{
+    Layout = null;
+    //dans la rêquete en cours , on regarde l'url et on prend le chemin local, ce qui renvoie le serveur/controlleur
+    var url = HttpContext.Current.Request.Url.LocalPath;
+    //Last transforme une chaine de caractères se qui se coupe au niveau des '/' et dont les parties se mettent dans les colonnes d'un tableau
+    var page = url.Split('/').Last();
+}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
+    <link href="~/Content/jquery.datetimepicker.css" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/style.css")" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <!-- Navbar content -->
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                @Html.ActionLink("AGENDA", "Index", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <div id="navbarToggler" class="navbar-collapse collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item">@Html.ActionLink("Accueil", "Index", "Home", null, new { @class = "nav-link" + (@page.Equals("Index") || String.IsNullOrEmpty(@page) ? " active" : "") })</li>
+                    <li class="nav-item">@Html.ActionLink("Ajouter un courtier", "AddBroker", "Broker", null, new { @class = "nav-link" + (@page.Equals("AddBroker") ? " active" : "") })</li>
+                    <li class="nav-item">@Html.ActionLink("Liste courtier", "ListBrokers", "Broker", null, new { @class = "nav-link" + (@page.Equals("listBroker") ? " active" : "") })</li>
+                    <li class="nav-item">@Html.ActionLink("Ajouter un client", "AddCustomer", "Customer", null, new { @class = "nav-link" + (@page.Equals("AddCustomer") ? " active" : "") })</li>
+                    <li class="nav-item">@Html.ActionLink("Liste clients", "ListCustomers", "Customer", null, new { @class = "nav-link" + (@page.Equals("ListCustomer") ? " active" : "") })</li>
+                    <li class="nav-item">@Html.ActionLink("Rendez-Vous", "AddAppointment", "Home", null, new { @class = "nav-link" + (@page.Equals("AddAppointment") ? " active" : "") })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    @RenderBody()
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/jquery.datetimepicker.js"></script>
+    <script src="~/Scripts/picker.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+﻿@model Organizer.Models.Appointment
+@{
+    ViewBag.Title = "DeleteAppointment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<!-- Modal -->
+<div class="modal" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Etes-vous sûr ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>            
+            <div class="modal-body">
+                <table class="table table-bordered text-center">
+                    <tr class="thead-dark">
+                        <th>Date du RDV</th>
+                        <th>Nom du courtier</th>
+                        <th>Nom du client</th>
+                        <th>Objet du RDV</th>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayFor(model => model.DateHour)</td>
+                        <td>@Html.DisplayFor(model => model.Broker.FullName)</td>
+                        <td>@Html.DisplayFor(model => model.Customer.FullName)</td>
+                        <td>@Html.DisplayFor(model => model.Subject)</td>
+                    </tr>
+                </table>               
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.AppointmentID)
+                    <input type="submit" class="btn btn-danger" value="Supprimer" />
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
